@@ -1,7 +1,7 @@
-import loglinear as ll
+import mlpn as ml
+import utils as ut
 import random
 import numpy as np
-import utils as ut
 
 STUDENT = {'name': 'YOUR NAME',
            'ID': 'YOUR ID NUMBER'}
@@ -24,7 +24,7 @@ def accuracy_on_dataset(dataset, params):
     for label, features in dataset:
         x = feats_to_vec(features)  # convert features to a vector.
         y = ut.L2I[label]  # convert the label to number if needed.
-        pred = ll.predict(x, params)
+        pred = ml.predict(x, params)
         if (y == pred):
             good += 1
         else:
@@ -38,7 +38,6 @@ def accuracy_on_dataset(dataset, params):
 def train_classifier(train_data, dev_data, num_iterations, learning_rate, params):
     """
     Create and train a classifier, and return the parameters.
-
     train_data: a list of (label, feature) pairs.
     dev_data  : a list of (label, feature) pairs.
     num_iterations: the maximal number of training iterations.
@@ -51,27 +50,26 @@ def train_classifier(train_data, dev_data, num_iterations, learning_rate, params
         for label, features in train_data:
             x = feats_to_vec(features)  # convert features to a vector.
             y = ut.L2I[label]  # convert the label to number if needed.
-            loss, grads = ll.loss_and_gradients(x, y, params)
+            loss, grads = ml.loss_and_gradients(x, y, params)
             cum_loss += loss
             # YOUR CODE HERE
             # update the parameters according to the gradients
             # and the learning rate.
-            params[0] -= learning_rate * grads[0]
-            params[1] -= learning_rate * grads[1]
+            for i, param in enumerate(params):
+                param -= learning_rate* grads[i]
 
         train_loss = cum_loss / len(train_data)
         train_accuracy = accuracy_on_dataset(train_data, params)
         dev_accuracy = accuracy_on_dataset(dev_data, params)
         print I, train_loss, train_accuracy, dev_accuracy
     return params
-    return good / (good + bad)
 
 
 def test(test_data, params):
     prediction_file= open("test.pred", 'w')
     for label, features in test_data:
         x = feats_to_vec(features)  # convert features to a vector.
-        pred = ll.predict(x, params)
+        pred = ml.predict(x, params)
         for key, val in ut.L2I.items():
             if val == pred:
                 label = key
@@ -84,13 +82,13 @@ if __name__ == '__main__':
     # YOUR CODE HERE
     # write code to load the train and dev sets, set up whatever you need,
     # and call train_classifier.
-    train_data = ut.TRAIN
-    dev_data = ut.DEV
-    in_dim = len(ut.F2I)
-    out_dim = len(ut.L2I)
+
     num_iterations = 40
     learning_rate = 0.1
+    hidden1 = 20
+    hidden2 = 30
+    dims = [len(ut.F2I), hidden1, hidden2, len(ut.L2I)]
 
-    params = ll.create_classifier(in_dim, out_dim)
-    trained_params = train_classifier(train_data, dev_data, num_iterations, learning_rate, params)
-    test(ut.TRAIN, trained_params)
+    params = ml.create_classifier(dims)
+    trained_params = train_classifier(ut.TRAIN, ut.DEV, num_iterations, learning_rate, params)
+    test(ut.TRAIN,trained_params)
