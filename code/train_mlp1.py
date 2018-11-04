@@ -69,7 +69,7 @@ def train_classifier(train_data, dev_data, num_iterations, learning_rate, params
 
 
 def test(test_data, params):
-    prediction_file= open("test.pred", 'w')
+    prediction_file= open("../data/test.pred", 'w')
     for label, features in test_data:
         x = feats_to_vec(features)  # convert features to a vector.
         pred = ml.predict(x, params)
