@@ -69,6 +69,19 @@ def create_classifier(in_dim, hid_dim, out_dim):
     return [W, b, W_tag, b_tag]
 
 
+def test(test_data, params):
+    prediction_file= open("../data/test.pred", 'w')
+    for label, features in test_data:
+        x = feats_to_vec(features)  # convert features to a vector.
+        pred = ml.predict(x, params)
+        for key, val in ut.L2I.items():
+            if val == pred:
+                label = key
+                break
+        prediction_file.write(str(label) + "\n")
+    prediction_file.close()
+
+           
 if __name__ == '__main__':
     # YOUR CODE HERE
     # write code to load the train and dev sets, set up whatever you need,
@@ -81,3 +94,4 @@ if __name__ == '__main__':
 
     params = create_classifier(in_dim , hidden, out_dim)
     trained_params = train_classifier(xor.data, num_iterations, learning_rate, params)
+    test(ut.TRAIN,trained_params)
