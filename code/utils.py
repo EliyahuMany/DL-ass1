@@ -5,6 +5,7 @@ import random
 STUDENT = {'name': 'Eliyahu Many_Yarin Ifrach',
            'ID': '308249150_205697410'}
 
+
 def read_data(fname):
     data = []
     for line in file(fname):
@@ -17,9 +18,9 @@ def text_to_bigrams(text):
     return ["%s%s" % (c1, c2) for c1, c2 in zip(text, text[1:])]
 
 
-TRAIN = [(l, text_to_bigrams(t)) for l, t in read_data("data/train")]
-DEV = [(l, text_to_bigrams(t)) for l, t in read_data("data/dev")]
-TEST = [(l, text_to_bigrams(t)) for l, t in read_data("data/test")]
+TRAIN = [(l, text_to_bigrams(t)) for l, t in read_data("train")]
+DEV = [(l, text_to_bigrams(t)) for l, t in read_data("dev")]
+TEST = [(l, text_to_bigrams(t)) for l, t in read_data("test")]
 
 from collections import Counter
 
