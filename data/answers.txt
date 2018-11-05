@@ -1,0 +1,8 @@
+STUDENT = {'name': 'Eliyahu Many_Yarin Ifrach',
+           'ID': '308249150_205697410'}
+
+1. We can get better accuracies by using backpropagation algorithms, backpropagation algorithms is king of learning technique.
+
+2. After switching from letter-bigrams to letter-unigrams, the best for the log-linear model was 60% and for the MLP model was 85%.
+
+3. After we tried to verify the MLP learning the XOR problem, we had to do at least 100 iterations to keep on stability.
