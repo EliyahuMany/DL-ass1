@@ -41,21 +41,21 @@ def loss_and_gradients(x, y, params):
     h = []
     z = []
     grad = []
+    gradients = []
     loss = -1 * np.log(probs[y])
     grad_temp = -1 * (y1 - probs)
 
-    gradients = []
-    gradients.append(np.outer(h.pop(), grad_temp))
-    gradients.append(np.copy(grad_temp))
-
     h.append(temp)
     for i in range(0, len(params), 2):
-        z2 = np.dot(h, params[i]) + params[i + 1]
+        z2 = np.dot(temp, params[i]) + params[i + 1]
         z.append(z2)
         temp = np.tanh(z2)
         h.append(temp)
     h.pop()
     z.pop()
+
+    gradients.append(np.outer(h.pop(), grad_temp))
+    gradients.append(np.copy(grad_temp))
 
     for i, (w, b) in enumerate(zip(params[-2::-2], params[-1::-2])):
         if (len(z) != 0):
@@ -90,7 +90,7 @@ def create_classifier(dims):
     We will have input of 300 dimension, a hidden layer of 20 dimension, passed
     to a layer of 30 dimensions, passed to learn of 40 dimensions, and finally
     an output of 5 dimensions.
-    
+
     Assume a tanh activation function between all the layers.
 
     return:
