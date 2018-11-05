@@ -3,8 +3,8 @@ import random
 import numpy as np
 import utils as ut
 
-STUDENT = {'name': 'YOUR NAME',
-           'ID': 'YOUR ID NUMBER'}
+STUDENT = {'name': 'Eliyahu Many_Yarin Ifrach',
+           'ID': '308249150_205697410'}
 
 
 def feats_to_vec(features):

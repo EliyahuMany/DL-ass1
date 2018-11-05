@@ -2,6 +2,8 @@
 # Use it if you want, or ignore it.
 import random
 
+STUDENT = {'name': 'Eliyahu Many_Yarin Ifrach',
+           'ID': '308249150_205697410'}
 
 def read_data(fname):
     data = []

@@ -4,8 +4,8 @@ import random
 import numpy as np
 import xor_data as xor
 
-STUDENT = {'name': 'YOUR NAME',
-           'ID': 'YOUR ID NUMBER'}
+STUDENT = {'name': 'Eliyahu Many_Yarin Ifrach',
+           'ID': '308249150_205697410'}
 
 
 def accuracy_on_dataset(dataset, params):
