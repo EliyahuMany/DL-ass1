@@ -83,8 +83,8 @@ if __name__ == '__main__':
     # write code to load the train and dev sets, set up whatever you need,
     # and call train_classifier.
 
-    num_iterations = 40
-    learning_rate = 0.1
+    num_iterations = 50
+    learning_rate = 0.01
     hidden1 = 20
     hidden2 = 30
     dims = [len(ut.F2I), hidden1, hidden2, len(ut.L2I)]
